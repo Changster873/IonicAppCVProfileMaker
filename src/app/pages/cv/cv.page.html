@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-fab>
+    <ion-fab-button (click)="navigate('/home')">Home</ion-fab-button>
+  </ion-fab>
+  <ion-fab horizontal="end">
+    <ion-fab-button (click)="navigate('/profile')" >Profile</ion-fab-button>
+  </ion-fab>
+  <ion-toolbar>
+    <ion-title *ngIf="user.firstName && user.lastName"> {{ user.firstName }} {{user.lastName}} </ion-title>
+    <ion-title *ngIf="!user.firstName && !user.lastName"> {{ user.email }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list-header> A bit about myself... </ion-list-header>
+
+    <!-- DESCRIPTION -->
+    <ion-item>
+        <ion-label>
+          <ion-grid>
+            <ion-row>
+                <ion-col class="text-center" size="7" *ngIf="cvProfile.employment">
+                    {{ cvProfile.description }}
+                  </ion-col>
+                  <ion-col size="7" class="placeholder-profile" *ngIf="!cvProfile.description">
+                    <span> Not Set </span>
+                  </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-label>
+      </ion-item>
+
+  <ion-list-header> Profile </ion-list-header>
+  <ion-list>
+
+    <!-- NAME -->
+    <ion-item >
+        <ion-label>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="text-left" size="5">Name</ion-col>
+              <ion-col class="text-center" size="7" *ngIf="user.firstName && user.lastName">
+                {{ user.firstName }} {{ user.lastName }}
+              </ion-col>
+              <ion-col size="7" class="placeholder-profile" *ngIf="!user.firstName">
+                <span> Not Set </span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-label>
+      </ion-item>
+
+      <!-- EMAIL -->
+      <ion-item>
+          <ion-label>
+            <ion-grid>
+              <ion-row>
+                <ion-col class="text-left" size="5">Email</ion-col>
+                <ion-col class="text-center" size="7" *ngIf="user.email">
+                  {{ user.email }}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-label>
+        </ion-item>
+
+        <!-- DATE OF BIRTH -->
+        <ion-item >
+            <ion-label>
+              <ion-grid>
+                <ion-row>
+                  <ion-col class="text-left" size="5">Date of Birth</ion-col>
+                  <ion-col class="text-center" size="7" *ngIf="user.birthDate">
+                    {{ user.birthDate | date: "dd/MM/yyyy"}}
+                  </ion-col>
+                  <ion-col size="7" class="placeholder-profile" *ngIf="!user.birthDate">
+                    <span> Not Set </span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-label>
+          </ion-item>
+
+          <ion-list-header> Education/Work </ion-list-header>
+
+          <!-- SCHOOL -->
+          <ion-item >
+              <ion-label>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col class="text-left" size="5">School</ion-col>
+                    <ion-col class="text-center" size="7" *ngIf="cvProfile.school">
+                      {{ cvProfile.school }}
+                    </ion-col>
+                    <ion-col size="7" class="placeholder-profile" *ngIf="!cvProfile.school">
+                      <span> Not Set </span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-label>
+            </ion-item>
+
+            <!-- EMPLOYMENT HISTORY -->
+            <ion-item >
+                <ion-label>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col class="text-left" size="5">Work</ion-col>
+                      <ion-col class="text-center" size="7" *ngIf="cvProfile.employment">
+                        {{ cvProfile.employment }}
+                      </ion-col>
+                      <ion-col size="7" class="placeholder-profile" *ngIf="!cvProfile.employment">
+                        <span> Not Set </span>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-label>
+              </ion-item>
+
+  </ion-list>
+</ion-content>

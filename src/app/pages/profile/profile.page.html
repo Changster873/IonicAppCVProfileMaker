@@ -1,0 +1,121 @@
+<ion-content>
+  <ion-menu side="start">
+    <ion-header>
+      <ion-toolbar translucent>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item class="menu_item">
+          <ion-icon name="home" slot="start"></ion-icon>
+          <ion-label ion-button (click)="navigate('/home')">Home</ion-label>
+        </ion-item>
+        <ion-item class="menu_item">
+            <ion-icon name="laptop" slot="start"></ion-icon>
+            <ion-label ion-button (click)="navigate('/cv')">Your CV</ion-label>
+          </ion-item>
+        <ion-item class="menu_item">
+          <ion-icon name="md-close" slot="start"></ion-icon>
+          <ion-label ion-button (click)="logout()">Logout</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" main>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Profile</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <!-- IMAGE BUTTON -->
+        <ion-fab vertical="top" horizontal="end" slot="fixed">
+          <ion-fab-button (click)="takePicture()">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+
+    <ion-content padding>
+
+        <ion-list>
+          <ion-list-header> Profile </ion-list-header>
+
+          <!-- IMAGE -->
+          <ion-item class="text-center">
+            <img [src]="userProfile?.photo.dataUrl" *ngIf="userProfile?.photo">
+            <span *ngIf="!userProfile?.photo"> Photo Not Set </span>
+          </ion-item>
+
+          <!-- NAME -->
+          <ion-item (click)="updateName()">
+              <ion-label>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col class="text-left" size="5">Name</ion-col>
+                    <ion-col class="text-center" size="7" *ngIf="userProfile?.firstName || userProfile?.lastName">
+                      {{ userProfile?.firstName }} {{ userProfile?.lastName }}
+                    </ion-col>
+                    <ion-col size="7" class="placeholder-profile" *ngIf="!userProfile?.firstName">
+                      <span> First and Last </span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-label>
+            </ion-item>
+
+            <!-- EMAIL -->
+          <ion-item (click)="updateEmail()">
+              <ion-label>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col class="text-left" size="5">Email</ion-col>
+                    <ion-col class="text-center" size="7" *ngIf="userProfile?.email">
+                      {{ userProfile?.email }}
+                    </ion-col>
+                    <ion-col size="7" class="placeholder-profile" *ngIf="!userProfile?.email">
+                      <span> Email Address </span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-label>
+            </ion-item>
+
+
+            <!-- PASSWORD -->
+            <ion-item (click)="updatePassword()">
+                <ion-label>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col class="text-left" size="5"> Change Password </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-label>
+              </ion-item>
+
+              <br>
+              <ion-list-header> Date of Birth </ion-list-header>
+              <!-- DOB -->
+              <ion-item>
+                  <ion-label class="dob-label">Change DoB</ion-label>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-datetime
+                        displayFormat = "DD/MM/YYYY"
+                        value = "userProfile?.birthDate"
+                        placeholder = "Select date"
+                        [(ngModel)] = "birthDate"
+                        (ionChange) = "updateDOB(birthDate)"
+                      ></ion-datetime>
+                    </ion-row>
+                  </ion-grid>
+              </ion-item>
+
+        </ion-list>
+      </ion-content>
+  </div>
+</ion-content>

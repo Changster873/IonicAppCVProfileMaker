@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-fab>
+    <ion-fab-button (click)="navigate('/profile')">Profile</ion-fab-button>
+  </ion-fab>
+  <ion-fab horizontal="end">
+      <ion-fab-button (click)="navigate('/cv')">Your CV</ion-fab-button>
+    </ion-fab>
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding >
+      <ion-list-header> Other people's CVs </ion-list-header>
+  <ion-list *ngFor="let dat of data; let i of img">
+    <ion-item *ngIf="dat.email != currentUser.email && dat != undefined" (click)="set(dat)">
+      <ion-thumbnail class="thumb" slot="start">
+        <img [src]="dat.photo.dataUrl" *ngIf="dat.photo != ''">
+        <ion-label *ngIf="dat.photo ==''">N/A</ion-label>
+      </ion-thumbnail>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="text-right" size="7" *ngIf="dat.firstName && dat.lastName">
+             {{ dat.firstName }} {{dat.lastName}}
+          </ion-col>
+          <ion-col class="text-right" size="7" *ngIf="!dat.firstName && !dat.lastName && dat.email">
+              {{ dat.email }}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>
